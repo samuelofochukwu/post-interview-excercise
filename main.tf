@@ -29,8 +29,7 @@ resource "aws_route_table" "private_rt" {
 
   # Route all DNS traffic (non-local) to the provided DNS resolvers via Transit Gateway
   route {
-    destination_prefix_list_id = "0.0.0.0/0"
-    transit_gateway_id         = "tgw-00aaaa000011112222"
+    transit_gateway_id = "tgw-00aaaa000011112222"
   }
 }
 
