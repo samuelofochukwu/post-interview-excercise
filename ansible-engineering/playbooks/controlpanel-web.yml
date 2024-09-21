@@ -1,5 +1,5 @@
 # playbooks/controlpanel-web.yml
-- hosts: controlpanel-web
+- hosts: controlpanel_web
   become: yes
   roles:
     - role: cloudwatch-logs
