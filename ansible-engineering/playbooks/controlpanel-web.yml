@@ -1,0 +1,15 @@
+# playbooks/controlpanel-web.yml
+- hosts: controlpanel-web
+  become: yes
+  roles:
+    - role: cloudwatch-logs
+      vars:
+        cloudwatch_logs:
+          - name: "controlpanel_web_app_log"
+            log_path: "/var/log/controlpanel/app.log"
+            log_group_name: "/aws/ec2/{{ inventory_hostname }}/controlpanel/app"
+            log_stream_name: "{instance_id}"
+          - name: "nginx_access_log"
+            log_path: "/var/log/nginx/access.log"
+            log_group_name: "/aws/ec2/{{ inventory_hostname }}/nginx/access"
+            log_stream_name: "{instance_id}"

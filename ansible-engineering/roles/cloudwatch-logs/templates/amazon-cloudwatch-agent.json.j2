@@ -1,0 +1,20 @@
+{
+    "logs": {
+      "logs_collected": {
+        "files": {
+          "collect_list": [
+            {% for log in cloudwatch_logs %}
+            {
+              "file_path": "{{ log.log_path }}",
+              "log_group_name": "{{ log.log_group_name }}",
+              "log_stream_name": "{{ log.log_stream_name }}",
+              "timezone": "UTC"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+      },
+      "log_stream_name": "{instance_id}"
+    }
+  }
+  

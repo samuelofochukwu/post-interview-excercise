@@ -1,0 +1,29 @@
+# roles/cloudwatch-logs/tasks/main.yml
+
+- name: Install CloudWatch Agent
+  apt:
+    name: amazon-cloudwatch-agent
+    state: present
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Create CloudWatch config directory
+  file:
+    path: /opt/aws/amazon-cloudwatch-agent/etc
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Generate CloudWatch agent configuration file
+  template:
+    src: amazon-cloudwatch-agent.json.j2
+    dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start and enable the CloudWatch agent
+  systemd:
+    name: amazon-cloudwatch-agent
+    state: started
+    enabled: true

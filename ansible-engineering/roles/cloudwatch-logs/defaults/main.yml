@@ -1,0 +1,15 @@
+# roles/cloudwatch-logs/defaults/main.yml
+
+cloudwatch_logs:
+  - name: "application_log"
+    log_path: "/var/log/app/application.log"
+    log_group_name: "/aws/ec2/{{ inventory_hostname }}/application"
+    log_stream_name: "{instance_id}"
+  - name: "nginx_access_log"
+    log_path: "/var/log/nginx/access.log"
+    log_group_name: "/aws/ec2/{{ inventory_hostname }}/nginx/access"
+    log_stream_name: "{instance_id}"
+  - name: "nginx_error_log"
+    log_path: "/var/log/nginx/error.log"
+    log_group_name: "/aws/ec2/{{ inventory_hostname }}/nginx/error"
+    log_stream_name: "{instance_id}"
